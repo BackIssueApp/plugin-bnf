@@ -19,3 +19,6 @@ by the maintainers when changes merge, so concurrent PRs don't conflict here.
   finds the album's series directly. Reprints of a tome fold into the first
   printing, and a one-shot album is a series of one. No account is needed.
   Requires a BackIssue build with the metadata provider hook (newer than 0.9.0).
+- Declares the id range it mints, so it can be turned on alongside other
+  metadata sources: searches merge its answers in, and the series it found
+  keep coming from the catalogue.

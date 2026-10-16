@@ -14,12 +14,15 @@ app's `plugins/` directory and restart.
 
 ## Use
 
-Open **Settings → Metadata** and set **Source** to the French editions
-provider. Press **Test source** to confirm the catalogue answers, then save.
-From then on every lookup BackIssue makes goes to the catalogue: searching for
-and adding a series, refreshing it, matching files on a scan, writing tags and
-importing reading lists. Switch the source back at any time; series added
-through this provider keep their data and refresh again when it is selected.
+Open **Settings → Metadata** and turn on the French editions source. Press
+**Test source** to confirm the catalogue answers, then save. Searches now ask
+the catalogue as well as every other source you have on, and show the answers
+together, best first; move the French editions source up the list to prefer
+its editions when two sources know the same series. A series you add from the
+catalogue keeps coming from it: refreshing it, matching files on a scan,
+writing tags and importing reading lists all go to the catalogue. Turn it off
+at any time; series added through it keep their data and refresh again once it
+is back on.
 
 - **Series** are the catalogue's set records: one per series, carrying the
   title, publisher and the year it began.
