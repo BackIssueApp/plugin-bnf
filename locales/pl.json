@@ -1,0 +1,15 @@
+{
+  "_shared": {
+    "plugins": {
+      "bnf": {
+        "description": "Francuskie wydania z katalogu Bibliothèque nationale de France jako źródło metadanych: serie, albumy, numery ISBN, wydawcy, daty wydania i twórcy, bez zakładania konta"
+      }
+    },
+    "metadataProviders": {
+      "bnf": {
+        "label": "Bibliothèque nationale de France (wydania francuskie)",
+        "note": "Wyszukuje serie i albumy w katalogu narodowym, który obejmuje niemal każdą książkę wydaną we Francji. Najlepszy dla albumów francuskojęzycznych i przekładów: numeracja, numery ISBN, wydawcy, daty wydania i twórcy są kompletne, ale brak list postaci i cykli fabularnych, streszczenia są rzadkie, a okładka pojawia się tylko dla albumów, dla których katalog ją ma. Konto nie jest potrzebne; Odkrywanie wymaga wbudowanej usługi lub ComicVine."
+      }
+    }
+  }
+}

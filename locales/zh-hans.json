@@ -1,0 +1,15 @@
+{
+  "_shared": {
+    "plugins": {
+      "bnf": {
+        "description": "以法国国家图书馆（Bibliothèque nationale de France）目录中的法语版本作为元数据源：系列、画册、ISBN、出版商、发行日期和创作者，无需账户"
+      }
+    },
+    "metadataProviders": {
+      "bnf": {
+        "label": "Bibliothèque nationale de France（法语版本）",
+        "note": "在收录几乎所有法国出版图书的国家目录中查找系列和画册。最适合法语画册和译本：编号、ISBN、出版商、发行日期和创作者信息完整，但没有角色列表和故事线，简介很少，只有目录中收有封面的画册才会显示封面。无需账户；“发现”需要内置服务或 ComicVine。"
+      }
+    }
+  }
+}
