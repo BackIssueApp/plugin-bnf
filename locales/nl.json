@@ -1,0 +1,15 @@
+{
+  "_shared": {
+    "plugins": {
+      "bnf": {
+        "description": "Franse uitgaven uit de catalogus van de Bibliothèque nationale de France als metadatabron: reeksen, albums, ISBN’s, uitgevers, verschijningsdata en credits, zonder account"
+      }
+    },
+    "metadataProviders": {
+      "bnf": {
+        "label": "Bibliothèque nationale de France (Franse uitgaven)",
+        "note": "Zoekt reeksen en albums op in de nationale catalogus, die bijna elk in Frankrijk uitgegeven boek vermeldt. Het best voor Franstalige albums en vertalingen: nummering, ISBN’s, uitgevers, verschijningsdata en credits zijn compleet, maar er zijn geen personagelijsten of verhaallijnen, samenvattingen zijn zeldzaam en een cover verschijnt alleen voor albums waarvan de catalogus er een heeft. Geen account nodig; Ontdekken heeft de ingebouwde dienst of ComicVine nodig."
+      }
+    }
+  }
+}

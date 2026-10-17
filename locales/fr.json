@@ -1,0 +1,15 @@
+{
+  "_shared": {
+    "plugins": {
+      "bnf": {
+        "description": "Les éditions françaises du catalogue de la Bibliothèque nationale de France comme source de métadonnées : séries, albums, ISBN, éditeurs, dates de parution et crédits, sans compte"
+      }
+    },
+    "metadataProviders": {
+      "bnf": {
+        "label": "Bibliothèque nationale de France (éditions françaises)",
+        "note": "Recherche les séries et albums dans le catalogue national, qui recense presque tous les livres publiés en France. Idéal pour les albums francophones et les traductions : numérotation, ISBN, éditeurs, dates de parution et crédits sont complets, mais il n’y a ni listes de personnages ni arcs narratifs, les résumés sont rares et une couverture n’apparaît que pour les albums dont le catalogue en possède une. Aucun compte n’est nécessaire ; Découvrir requiert le service intégré ou ComicVine."
+      }
+    }
+  }
+}

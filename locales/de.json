@@ -1,0 +1,15 @@
+{
+  "_shared": {
+    "plugins": {
+      "bnf": {
+        "description": "Französische Ausgaben aus dem Katalog der Bibliothèque nationale de France als Metadatenquelle: Reihen, Alben, ISBNs, Verlage, Erscheinungsdaten und Credits, ohne Konto"
+      }
+    },
+    "metadataProviders": {
+      "bnf": {
+        "label": "Bibliothèque nationale de France (französische Ausgaben)",
+        "note": "Sucht Reihen und Alben im Nationalkatalog, der fast jedes in Frankreich erschienene Buch verzeichnet. Am besten für französischsprachige Alben und Übersetzungen: Nummerierung, ISBNs, Verlage, Erscheinungsdaten und Credits sind vollständig, aber es gibt keine Figurenlisten oder Handlungsbögen, Zusammenfassungen sind selten, und ein Cover erscheint nur für Alben, zu denen der Katalog eines hat. Kein Konto nötig; Entdecken braucht den integrierten Dienst oder ComicVine."
+      }
+    }
+  }
+}

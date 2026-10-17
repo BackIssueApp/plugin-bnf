@@ -8,6 +8,13 @@ by the maintainers when changes merge, so concurrent PRs don't conflict here.
 
 ## [Unreleased]
 
+### Added
+- **Translated provider card.** The source’s name and note under Settings →
+  Metadata, and the plugin description on the Plugins page, follow the language
+  picked under Profile → Language on BackIssue builds newer than 0.9.0; English
+  on older ones. French, German, Spanish, Italian, Portuguese and Dutch ship in
+  `locales/`.
+
 ## [0.1.0] — 2026-10-16
 
 ### Added
