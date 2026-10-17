@@ -9,6 +9,9 @@ by the maintainers when changes merge, so concurrent PRs don't conflict here.
 ## [Unreleased]
 
 ### Added
+- **Records keep their ARK.** The plugin names its catalog and gives each
+  series' and album's ARK identifier, which BackIssue builds that record
+  metadata catalogs keep with the cached record. Older builds ignore it.
 - **Translated provider card.** The source’s name and note under Settings →
   Metadata, and the plugin description on the Plugins page, follow the language
   picked under Profile → Language on BackIssue builds newer than 0.9.0; English
