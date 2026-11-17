@@ -32,7 +32,11 @@ export const BASE = 'https://catalogue.bnf.fr/api/SRU';
 const NAAN = 'ark:/12148/';
 const POLITE_MS = 400;
 const TIMEOUT_MS = 20000;
+const RETRY_MS = 1000;
 const PAGE = 100;
+// Network errors worth a second and third try: the catalogue drops idle
+// keep-alive sockets and some egress paths reset the first connection.
+const TRANSIENT = new Set(['ECONNRESET', 'ECONNREFUSED', 'EPIPE', 'EAI_AGAIN', 'UND_ERR_SOCKET', 'UND_ERR_CONNECT_TIMEOUT']);
 
 const UA = (() => {
   let version = '0.0.0';
@@ -422,11 +426,12 @@ const isbnLike = (q) => /^(?:97[89][\d\s-]{10,14}|\d{9}[\dXx])$/.test(String(q |
  * search, volume, issue, issuesByIds, findIssue, searchArcs, storyArcIssues,
  * test. No `list`: the catalogue has no feeds for Discover to read.
  */
-export function makeBnfClient({ fetchImpl, politeMs, base, timeoutMs } = {}) {
+export function makeBnfClient({ fetchImpl, politeMs, base, timeoutMs, retryMs } = {}) {
   const doFetch = fetchImpl || fetch;
   const root = String(base || process.env.BNF_BASE_OVERRIDE || BASE).replace(/\/+$/, '');
   const pace = politeMs !== undefined ? politeMs : POLITE_MS;
   const timeout = timeoutMs !== undefined ? timeoutMs : TIMEOUT_MS;
+  const retry = retryMs !== undefined ? retryMs : RETRY_MS;
   let nextAt = 0;
 
   async function call(query, { start = 1, max = PAGE } = {}, attempt = 0) {
@@ -436,10 +441,16 @@ export function makeBnfClient({ fetchImpl, politeMs, base, timeoutMs } = {}) {
     const url = `${root}?version=1.2&operation=searchRetrieve&recordSchema=unimarcxchange&maximumRecords=${max}&startRecord=${start}&query=${encodeURIComponent(query)}`;
     let resp;
     try {
-      resp = await doFetch(url, { headers: { 'User-Agent': UA, Accept: 'application/xml' }, signal: AbortSignal.timeout(timeout) });
+      // Connection: close — the catalogue advertises a 5 s keep-alive, shorter
+      // than the gap between our paced calls, so a reused socket is often
+      // already gone (ECONNRESET on the second request of a lookup).
+      resp = await doFetch(url, { headers: { 'User-Agent': UA, Accept: 'application/xml', Connection: 'close' }, signal: AbortSignal.timeout(timeout) });
     } catch (e) {
-      if (attempt < 1) { await sleep(500); return call(query, { start, max }, attempt + 1); }
       const code = e?.cause?.code || e?.name;
+      // A reset or refused connection gets two more tries with a pause; any
+      // other failure one quick retry, as before.
+      const tries = TRANSIENT.has(code) ? 2 : 1;
+      if (attempt < tries) { await sleep(TRANSIENT.has(code) ? retry * (attempt + 1) : 500); return call(query, { start, max }, attempt + 1); }
       const why = code === 'UND_ERR_CONNECT_TIMEOUT' || code === 'TimeoutError' || code === 'AbortError' ? 'timed out' : (e?.cause?.code || e?.cause?.message || e?.message || e);
       throw new Error(`Could not reach the BnF catalogue (${why})`);
     }

@@ -8,6 +8,13 @@ by the maintainers when changes merge, so concurrent PRs don't conflict here.
 
 ## [Unreleased]
 
+### Fixed
+
+- **Searches failing with "Could not reach the BnF catalogue (ECONNRESET)".** A reset or refused
+  connection is now retried twice with a pause before the search is given up, and each request
+  closes its connection instead of reusing one the catalogue may already have dropped (it keeps
+  idle connections for only five seconds). (#1)
+
 ## [0.1.0] — 2026-10-17
 
 ### Added

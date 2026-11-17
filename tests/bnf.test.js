@@ -234,6 +234,18 @@ test('a diagnostic, a busy catalogue and an unreachable host read clearly', asyn
   await assert.rejects(down.test(), /Could not reach the BnF catalogue \(ENOTFOUND\)/);
 });
 
+test('a reset connection is retried before the catalogue is called unreachable', async () => {
+  const reset = () => Promise.reject(Object.assign(new TypeError('fetch failed'), { cause: { code: 'ECONNRESET' } }));
+  let calls = 0;
+  const flaky = makeBnfClient({ politeMs: 0, retryMs: 0, fetchImpl: async () => (++calls < 3 ? reset() : { ok: true, status: 200, text: async () => ASTERIX }) });
+  assert.equal((await flaky.test()).ok, true, 'two resets, then the answer');
+  assert.equal(calls, 3);
+  calls = 0;
+  const dead = makeBnfClient({ politeMs: 0, retryMs: 0, fetchImpl: async () => { calls++; return reset(); } });
+  await assert.rejects(dead.test(), /Could not reach the BnF catalogue \(ECONNRESET\)/);
+  assert.equal(calls, 3, 'three tries, no more');
+});
+
 test('the Test round trip reports the catalogue count', async () => {
   const c = client([['bib.title all "astérix"', { xml: ASTERIX }]]);
   const r = await c.test();
