@@ -8,6 +8,8 @@ by the maintainers when changes merge, so concurrent PRs don't conflict here.
 
 ## [Unreleased]
 
+## [0.1.1] — 2026-11-17
+
 ### Fixed
 
 - **Searches failing with "Could not reach the BnF catalogue (ECONNRESET)".** A reset or refused

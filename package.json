@@ -1,6 +1,6 @@
 {
   "name": "bnf",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "French editions from the Bibliothèque nationale de France catalogue as a metadata source: series, albums, ISBNs, publishers, release dates and credits, no account needed",
   "type": "module",
   "private": true,
